@@ -2,17 +2,18 @@ name: My first workflow
 on:
   push:
     branches:
-    - "deploy"
+    - "main"
 jobs:
   echo_the_date:
     runs-on: ubuntu-latest
     env:
-      OPENWEATHERMAP_API: ${{secrets.OPENWEATHERMAP_API}}
+      OPENWEATHERMAP_API: ${{ secrets.OPENWEATHERMAP_API }}
     steps:
     - name: echo the date
       run: echo "The current time and date is $(date)"
     - name: echo the current branch
-      run: echo ${{github.ref_name}}
+      run: echo ${{ github.ref_name }}
+
   test_and_deploy:
     runs-on: ubuntu-latest
     steps:
@@ -21,7 +22,7 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
-     - name: Setup Maven
+    - name: Setup Maven
       uses: stCarolas/setup-maven@v4.3
       with:
         maven-version: 3.8.2
